@@ -5,9 +5,8 @@ const DEFAULT_COLOR = "#666666";
 const PRIMARY_COLOR = "#546de5";
 const DANGER_COLOR = "#c0392b";
 const SUCCESS_COLOR = "#27ae60";
-const DISABLE_COLOR = "#555";
 
-export const darkTheme: IAiniTheme = {
+export const defaultDarkTheme: IAiniTheme = {
     colors: {
         default: {
             idle: DEFAULT_COLOR,

@@ -1,28 +1,21 @@
 import classNames from "classnames";
 import React from "react";
-import { ButtonApperance } from '../../../types/ButtonApperance';
-import { ButtonVariant } from '../../../types/ButtonVariant';
+import { ButtonApperance } from "../../../types/ButtonApperance";
+import { ButtonVariant } from "../../../types/ButtonVariant";
 import { useButtonStyles } from "./Button.styles";
 
-
-const utilSwitch = (
-    source: any,
-    data: [a: any, b: any][],
-    defaultValue: any = null
-) => {
-    const item = data.find(([sourceValue]) => {
-        return source === sourceValue;
+const utilSwitch = (source: any, data: any[], defaultValue: any = null) => {
+    const item = data.find((item: any[]) => {
+        return source === item[0];
     });
 
     if (item) {
-        const [, result] = item;
+        const result = item[1];
         return result;
     }
 
     return defaultValue;
 };
-
-
 
 interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     children: JSX.Element | JSX.Element[] | string | number;

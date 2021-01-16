@@ -1,5 +1,5 @@
 import { AiniProvider } from "../src/providers/AiniProvider";
-import { darkTheme } from "../src/themes/darkTheme";
+import { defaultDarkTheme } from "../src/themes/defaultDarkTheme";
 
 // https://storybook.js.org/docs/react/writing-stories/parameters#global-parameters
 export const parameters = {
@@ -9,7 +9,7 @@ export const parameters = {
 
 export const decorators = [
     (Story) => (
-        <AiniProvider theme={darkTheme}>
+        <AiniProvider theme={defaultDarkTheme}>
             <Story />
         </AiniProvider>
     ),
