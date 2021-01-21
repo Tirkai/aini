@@ -7,22 +7,31 @@ export const useButtonStyles = createUseStyles<IAiniTheme>(
             display: "inline-flex",
             alignItems: "center",
             height: "32px",
-            minWidth: "64px",
-            borderWidth: "1px",
-            borderStyle: "solid",
-            borderRadius: "4px",
-            borderColor: "transparent",
+            border: "none",
+            background: "none",
             boxSizing: "border-box",
+            borderRadius: "4px",
+            minWidth: "32px",
         },
         buttonBase: {
             position: "relative",
-            borderColor: theme.colors.default.idle,
             outline: "none",
-            padding: "4px 12px",
-            background: theme.colors.default.idle,
             color: "white",
             overflow: "hidden",
+            padding: "0",
+        },
+        buttonContent: {
+            display: "flex",
+            alignItems: "center",
+            padding: "4px 12px",
+            background: theme.colors.default.idle,
+            borderColor: theme.colors.default.idle,
+            boxSizing: "border-box",
             transition: "ease 0.3s",
+            height: "32px",
+            borderWidth: "1px",
+            borderStyle: "solid",
+            borderRadius: "4px",
             "&:hover": {
                 cursor: "pointer",
                 borderColor: theme.colors.default.idle,
@@ -73,42 +82,6 @@ export const useButtonStyles = createUseStyles<IAiniTheme>(
         },
         fillApperance: {
             background: "auto",
-        },
-        reveal: {
-            position: "absolute",
-            top: 0,
-            left: "0%",
-            transform: "scale(1)",
-            width: "100%",
-            height: "100%",
-            opacity: 0,
-            transition: "ease 5s",
-            background: `radial-gradient(
-            circle, 
-            rgba(0,0,0,0) 0%, 
-            rgba(255,255,255,1) 45%, 
-            rgba(255,255,255,1) 60%, 
-            rgba(0,0,0,0) 100%
-        );`,
-        },
-        activeReveal: {
-            animation: `$revealFade 0.5s`,
-        },
-        "@keyframes revealFade": {
-            from: {
-                opacity: 0,
-                transform: "scale(0.5)",
-            },
-            "10%": {
-                opacity: 0.2,
-            },
-            "50%": {
-                opacity: 0.2,
-            },
-            to: {
-                opacity: 0,
-                transform: "scale(2)",
-            },
         },
     }),
     {

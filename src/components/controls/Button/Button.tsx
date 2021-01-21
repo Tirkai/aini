@@ -2,6 +2,7 @@ import classNames from "classnames";
 import React from "react";
 import { ButtonApperance } from "../../../types/ButtonApperance";
 import { ButtonVariant } from "../../../types/ButtonVariant";
+import { RevealEffect } from "../../effects/RevealEffect/RevealEffect";
 import { useButtonStyles } from "./Button.styles";
 
 const utilSwitch = (source: any, data: any[], defaultValue: any = null) => {
@@ -46,15 +47,20 @@ export const Button = (props: IButtonProps) => {
 
     return (
         <button
-            className={classNames(
-                styles.buttonShape,
-                styles.buttonBase,
-                getVariant(),
-                getApperanceStyle()
-            )}
+            className={classNames(styles.buttonShape, styles.buttonBase)}
             {...props}
         >
-            {props.children}
+            <RevealEffect>
+                <div
+                    className={classNames(
+                        styles.buttonContent,
+                        getVariant(),
+                        getApperanceStyle()
+                    )}
+                >
+                    {props.children}
+                </div>
+            </RevealEffect>
         </button>
     );
 };
