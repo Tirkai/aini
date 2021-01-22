@@ -6,7 +6,7 @@ export const useButtonStyles = createUseStyles<IAiniTheme>(
         buttonShape: {
             display: "inline-flex",
             alignItems: "center",
-            height: "32px",
+            height: "36px",
             border: "none",
             background: "none",
             boxSizing: "border-box",
@@ -28,7 +28,7 @@ export const useButtonStyles = createUseStyles<IAiniTheme>(
             borderColor: theme.colors.default.idle,
             boxSizing: "border-box",
             transition: "ease 0.3s",
-            height: "32px",
+            height: "100%",
             borderWidth: "1px",
             borderStyle: "solid",
             borderRadius: "4px",
