@@ -1,12 +1,5 @@
-export interface IThemeColor {
-    idle: string;
-    hover: string;
-}
-
-export interface IGhostColor {
-    idle: string;
-    pulse: string;
-}
+import { IGhostColor } from "./IGhostColor";
+import { IThemeColor } from "./IThemeColor";
 
 export interface IAiniTheme {
     colors: {
@@ -14,7 +7,6 @@ export interface IAiniTheme {
         primary: IThemeColor;
         danger: IThemeColor;
         success: IThemeColor;
-
         ghost: IGhostColor;
     };
 }

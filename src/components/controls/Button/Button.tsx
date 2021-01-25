@@ -2,39 +2,34 @@ import classNames from "classnames";
 import React from "react";
 import { ButtonApperance } from "../../../types/ButtonApperance";
 import { ButtonVariant } from "../../../types/ButtonVariant";
+import { ElementSize } from "../../../types/ElementSize";
+import { switched } from "../../../util";
 import { RevealEffect } from "../../effects/RevealEffect/RevealEffect";
 import { useButtonStyles } from "./Button.styles";
-
-const utilSwitch = (source: any, data: any[], defaultValue: any = null) => {
-    const item = data.find((item: any[]) => {
-        return source === item[0];
-    });
-
-    if (item) {
-        const result = item[1];
-        return result;
-    }
-
-    return defaultValue;
-};
-
-interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    children: JSX.Element | JSX.Element[] | string | number;
-    variant?: ButtonVariant;
-    apperance?: ButtonApperance;
-}
+import { IButtonProps } from "./IButtonProps";
 
 export const Button = (props: IButtonProps) => {
-    const styles = useButtonStyles();
+    const styles = useButtonStyles(props);
 
     const getApperanceStyle = () =>
-        utilSwitch(props.apperance, [
-            ["fill", styles.fillApperance],
-            ["outline", styles.outlineApperance],
-        ]);
+        switched<ButtonApperance, string>(
+            props.apperance,
+            [
+                ["fill", styles.fillApperance],
+                ["outline", styles.outlineApperance],
+            ],
+            styles.fillApperance
+        );
+
+    // props.apperance
+    // ? utilSwitch<ButtonApperance, string>(props.apperance, [
+    //       { key: "fill", value: styles.fillApperance },
+    //       { key: "outline", value: styles.outlineApperance },
+    //   ])
+    // : styles.fillApperance;
 
     const getVariant = () =>
-        utilSwitch(
+        switched<ButtonVariant, string>(
             props.variant,
             [
                 ["default", styles.defaultVariant],
@@ -42,12 +37,27 @@ export const Button = (props: IButtonProps) => {
                 ["primary", styles.primaryVariant],
                 ["danger", styles.dangerVariant],
             ],
-            styles.DefaultVariant
+            styles.defaultVariant
+        );
+
+    const getSize = () =>
+        switched<ElementSize, string>(
+            props.size,
+            [
+                ["small", styles.smallSize],
+                ["medium", styles.mediumSize],
+                ["large", styles.largeSize],
+            ],
+            styles.mediumSize
         );
 
     return (
         <button
-            className={classNames(styles.buttonShape, styles.buttonBase)}
+            className={classNames(
+                styles.buttonShape,
+                styles.buttonBase,
+                getSize()
+            )}
             {...props}
             data-locator="button"
         >

@@ -1,8 +1,21 @@
+import { assign } from "lodash";
 import { createUseStyles } from "react-jss";
 import { IAiniTheme } from "../../../interfaces/IAiniTheme";
+import { IThemeColor } from "../../../interfaces/IThemeColor";
+
+const getVariantStyle = (color: IThemeColor) => ({
+    background: color.idle,
+    borderColor: color.idle,
+    "&:hover": {
+        background: color.hover,
+        borderColor: color.hover,
+    },
+});
+
+const name = "Button";
 
 export const useButtonStyles = createUseStyles<IAiniTheme>(
-    (theme) => ({
+    (theme: IAiniTheme) => ({
         buttonShape: {
             display: "inline-flex",
             alignItems: "center",
@@ -20,60 +33,36 @@ export const useButtonStyles = createUseStyles<IAiniTheme>(
             overflow: "hidden",
             padding: "0",
         },
-        buttonContent: {
-            display: "flex",
-            alignItems: "center",
-            padding: "4px 12px",
-            background: theme.colors.default.idle,
-            borderColor: theme.colors.default.idle,
-            boxSizing: "border-box",
-            transition: "ease 0.3s",
-            height: "100%",
-            borderWidth: "1px",
-            borderStyle: "solid",
-            borderRadius: "4px",
-            "&:hover": {
+        buttonContent: assign(
+            {
+                display: "flex",
+                alignItems: "center",
+                padding: "4px 12px",
                 cursor: "pointer",
-                borderColor: theme.colors.default.idle,
-                background: theme.colors.default.hover,
+                boxSizing: "border-box",
+                transition: "ease 0.3s",
+                height: "100%",
+                borderWidth: "1px",
+                borderStyle: "solid",
+                borderRadius: "4px",
             },
+            getVariantStyle(theme.colors.default)
+        ),
+        defaultVariant: getVariantStyle(theme.colors.default),
+        successVariant: getVariantStyle(theme.colors.success),
+        primaryVariant: getVariantStyle(theme.colors.primary),
+        dangerVariant: getVariantStyle(theme.colors.danger),
+
+        smallSize: {
+            height: "30px",
         },
-        defaultVariant: {
-            background: theme.colors.default.idle,
-            borderColor: theme.colors.default.idle,
-            // border: (props: IButtonProps) => props.apperance,
-            "&:hover": {
-                background: theme.colors.default.hover,
-                borderColor: theme.colors.default.hover,
-            },
+        mediumSize: {
+            height: "36px",
         },
-        successVariant: {
-            background: theme.colors.success.idle,
-            borderColor: theme.colors.success.idle,
-            // border: (props: IButtonProps) => props.apperance,
-            "&:hover": {
-                background: theme.colors.success.hover,
-                borderColor: theme.colors.success.hover,
-            },
+        largeSize: {
+            height: "42px",
         },
-        primaryVariant: {
-            background: theme.colors.primary.idle,
-            borderColor: theme.colors.primary.idle,
-            // border: (props: IButtonProps) => props.apperance,
-            "&:hover": {
-                background: theme.colors.primary.hover,
-                borderColor: theme.colors.primary.hover,
-            },
-        },
-        dangerVariant: {
-            background: theme.colors.danger.idle,
-            borderColor: theme.colors.danger.idle,
-            // border: (props: IButtonProps) => props.apperance,
-            "&:hover": {
-                background: theme.colors.danger.hover,
-                borderColor: theme.colors.danger.hover,
-            },
-        },
+
         outlineApperance: {
             background: "none",
             "&:hover": {
@@ -85,6 +74,6 @@ export const useButtonStyles = createUseStyles<IAiniTheme>(
         },
     }),
     {
-        name: "Button",
+        name,
     }
 );
