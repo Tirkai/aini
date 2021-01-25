@@ -49,6 +49,7 @@ export const Button = (props: IButtonProps) => {
         <button
             className={classNames(styles.buttonShape, styles.buttonBase)}
             {...props}
+            data-locator="button"
         >
             <RevealEffect>
                 <div
