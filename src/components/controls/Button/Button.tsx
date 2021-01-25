@@ -1,8 +1,8 @@
 import classNames from "classnames";
-import React from "react";
+import React, { useMemo } from "react";
 import { ButtonApperance } from "../../../types/ButtonApperance";
 import { ButtonVariant } from "../../../types/ButtonVariant";
-import { ElementSize } from "../../../types/ElementSize";
+import { UIElementSize } from "../../../types/UIElementSize";
 import { switched } from "../../../util";
 import { RevealEffect } from "../../effects/RevealEffect/RevealEffect";
 import { useButtonStyles } from "./Button.styles";
@@ -11,62 +11,61 @@ import { IButtonProps } from "./IButtonProps";
 export const Button = (props: IButtonProps) => {
     const styles = useButtonStyles(props);
 
-    const getApperanceStyle = () =>
-        switched<ButtonApperance, string>(
-            props.apperance,
-            [
-                ["fill", styles.fillApperance],
-                ["outline", styles.outlineApperance],
-            ],
-            styles.fillApperance
-        );
+    const apperance = useMemo(
+        () =>
+            switched<ButtonApperance, string>(
+                props.apperance,
+                [
+                    ["fill", styles.fillApperance],
+                    ["outline", styles.outlineApperance],
+                ],
+                styles.fillApperance
+            ),
+        [props.apperance]
+    );
 
-    // props.apperance
-    // ? utilSwitch<ButtonApperance, string>(props.apperance, [
-    //       { key: "fill", value: styles.fillApperance },
-    //       { key: "outline", value: styles.outlineApperance },
-    //   ])
-    // : styles.fillApperance;
+    const variant = useMemo(
+        () =>
+            switched<ButtonVariant, string>(
+                props.variant,
+                [
+                    ["default", styles.defaultVariant],
+                    ["success", styles.successVariant],
+                    ["primary", styles.primaryVariant],
+                    ["danger", styles.dangerVariant],
+                ],
+                styles.defaultVariant
+            ),
+        [props.variant]
+    );
 
-    const getVariant = () =>
-        switched<ButtonVariant, string>(
-            props.variant,
-            [
-                ["default", styles.defaultVariant],
-                ["success", styles.successVariant],
-                ["primary", styles.primaryVariant],
-                ["danger", styles.dangerVariant],
-            ],
-            styles.defaultVariant
-        );
-
-    const getSize = () =>
-        switched<ElementSize, string>(
-            props.size,
-            [
-                ["small", styles.smallSize],
-                ["medium", styles.mediumSize],
-                ["large", styles.largeSize],
-            ],
-            styles.mediumSize
-        );
+    const size = useMemo(
+        () =>
+            switched<UIElementSize, string>(
+                props.size,
+                [
+                    ["small", styles.smallBaseSize],
+                    ["medium", styles.mediumBaseSize],
+                    ["large", styles.largeBaseSize],
+                ],
+                styles.mediumSize
+            ),
+        [props.size]
+    );
 
     return (
         <button
-            className={classNames(
-                styles.buttonShape,
-                styles.buttonBase,
-                getSize()
-            )}
+            className={classNames(styles.buttonShape, styles.buttonBase, size)}
             {...props}
             data-locator="button"
         >
-            <RevealEffect>
+            <RevealEffect disabled={props.disabled}>
                 <div
                     className={classNames(
                         styles.buttonContent,
-                        getVariant(),
-                        getApperanceStyle()
+                        variant,
+                        apperance,
+                        { [styles.disabled]: props.disabled }
                     )}
                 >
                     {props.children}

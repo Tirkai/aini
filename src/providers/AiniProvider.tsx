@@ -1,6 +1,7 @@
 import React from "react";
 import { JssProvider, SheetsRegistry, ThemeProvider } from "react-jss";
 import { IAiniTheme } from "../interfaces/IAiniTheme";
+import { JSXChildren } from "../types/JSXChildren";
 
 interface IAiniContextValue {
     theme?: IAiniTheme;
@@ -9,7 +10,7 @@ interface IAiniContextValue {
 export const AiniContext = React.createContext<IAiniContextValue>({});
 
 interface IAiniProviderProps {
-    children: JSX.Element | JSX.Element[] | string | number;
+    children: JSXChildren;
     theme: IAiniTheme;
 }
 

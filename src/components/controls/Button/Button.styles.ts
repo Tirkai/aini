@@ -12,6 +12,9 @@ const getVariantStyle = (color: IThemeColor) => ({
     },
 });
 
+const getBaseSize = (value: number) => ({
+    height: value,
+});
 const name = "Button";
 
 export const useButtonStyles = createUseStyles<IAiniTheme>(
@@ -19,7 +22,7 @@ export const useButtonStyles = createUseStyles<IAiniTheme>(
         buttonShape: {
             display: "inline-flex",
             alignItems: "center",
-            height: "36px",
+            height: theme.sizes.medium,
             border: "none",
             background: "none",
             boxSizing: "border-box",
@@ -53,15 +56,9 @@ export const useButtonStyles = createUseStyles<IAiniTheme>(
         primaryVariant: getVariantStyle(theme.colors.primary),
         dangerVariant: getVariantStyle(theme.colors.danger),
 
-        smallSize: {
-            height: "30px",
-        },
-        mediumSize: {
-            height: "36px",
-        },
-        largeSize: {
-            height: "42px",
-        },
+        smallBaseSize: getBaseSize(theme.sizes.small),
+        mediumBaseSize: getBaseSize(theme.sizes.medium),
+        largeBaseSize: getBaseSize(theme.sizes.large),
 
         outlineApperance: {
             background: "none",
@@ -72,6 +69,15 @@ export const useButtonStyles = createUseStyles<IAiniTheme>(
         fillApperance: {
             background: "auto",
         },
+
+        disabled: assign(getVariantStyle(theme.colors.default), {
+            opacity: 0.5,
+            cursor: "default",
+            "&:hover": {
+                background: theme.colors.default.idle,
+                borderColor: theme.colors.default.idle,
+            },
+        }),
     }),
     {
         name,

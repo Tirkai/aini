@@ -29,12 +29,6 @@ const DefaultButtonTemplate: Story<IButtonProps> = (args) => (
 const GhostButtonTemplate: Story<{}> = () => <GhostButton />;
 
 export const Default = DefaultButtonTemplate.bind({});
-export const Primary = DefaultButtonTemplate.bind({});
-export const Success = DefaultButtonTemplate.bind({});
-export const Danger = DefaultButtonTemplate.bind({});
 export const Ghost = GhostButtonTemplate.bind({});
 
 Default.args = {};
-Primary.args = { variant: "primary" };
-Success.args = { variant: "success" };
-Danger.args = { variant: "danger" };

@@ -29,4 +29,17 @@ export const defaultDarkTheme: IAiniTheme = {
             pulse: "#555",
         },
     },
+    spaces: {
+        extraSmall: 4,
+        small: 8,
+        preMedium: 12,
+        medium: 16,
+        large: 20,
+        extraLarge: 24,
+    },
+    sizes: {
+        small: 30,
+        medium: 36,
+        large: 42,
+    },
 };

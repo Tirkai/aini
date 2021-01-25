@@ -9,4 +9,17 @@ export interface IAiniTheme {
         success: IThemeColor;
         ghost: IGhostColor;
     };
+    spaces: {
+        extraSmall: number;
+        small: number;
+        preMedium: number;
+        medium: number;
+        large: number;
+        extraLarge: number;
+    };
+    sizes: {
+        small: number;
+        medium: number;
+        large: number;
+    };
 }

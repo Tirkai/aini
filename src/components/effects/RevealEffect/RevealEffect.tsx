@@ -4,6 +4,7 @@ import { JSXChildren } from "../../../types/JSXChildren";
 import { useRevealStyles } from "./Reveal.styles";
 interface IRevealEffectProps {
     children: JSXChildren;
+    disabled?: boolean;
 }
 
 export const RevealEffect = (props: IRevealEffectProps) => {
@@ -12,6 +13,9 @@ export const RevealEffect = (props: IRevealEffectProps) => {
     const [effectPosition, setEffectPosition] = useState({ x: 0, y: 0 });
 
     const handlePlayRevealAnimation = (event: React.MouseEvent) => {
+        if (props.disabled) {
+            return;
+        }
         const clientX = event.clientX;
         const clientY = event.clientY;
         const target = event.target as Element;
